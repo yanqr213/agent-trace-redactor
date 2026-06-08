@@ -162,30 +162,34 @@ def write_bundle(
     for file_result in report.files:
         target = redacted_dir / file_result.output_name
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(file_result.redacted_text, encoding="utf-8", newline="")
+        _write_text(target, file_result.redacted_text)
         if include_diff:
             diff_name = sanitize_output_name(file_result.output_name).replace("/", "__") + ".diff"
-            (diff_dir / diff_name).write_text(
+            _write_text(
+                diff_dir / diff_name,
                 safe_diff(file_result.output_name, file_result.redacted_text, len(file_result.findings), file_result.changed),
-                encoding="utf-8",
-                newline="",
             )
 
-    (report_dir / "report.json").write_text(render_json_report(report), encoding="utf-8", newline="")
-    (report_dir / "report.md").write_text(render_markdown_report(report), encoding="utf-8", newline="")
+    _write_text(report_dir / "report.json", render_json_report(report))
+    _write_text(report_dir / "report.md", render_markdown_report(report))
     manifest = {
         "created_at": datetime.now(timezone.utc).isoformat(),
         "schema_version": report.schema_version,
         "files": [item.to_summary() for item in report.files],
         "report": "reports/report.json",
     }
-    (output_dir / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="")
+    _write_text(output_dir / "manifest.json", json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
 
     zip_path = None
     if zip_bundle:
         archive_base = str(output_dir)
         zip_path = shutil.make_archive(archive_base, "zip", root_dir=output_dir)
     return BundleResult(output_dir=str(output_dir), report=report, zip_path=zip_path)
+
+
+def _write_text(path: Path, text: str) -> None:
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        handle.write(text)
 
 
 def _common_root(paths: List[Path]) -> Path:
