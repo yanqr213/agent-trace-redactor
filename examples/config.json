@@ -1,0 +1,20 @@
+{
+  "context_chars": 36,
+  "hash_salt": "replace-this-salt-in-your-team",
+  "preserve_json": true,
+  "strict_json": false,
+  "max_file_bytes": 10485760,
+  "include_extensions": [".json", ".jsonl", ".log", ".txt", ".md", ".env"],
+  "ignore_dirs": [".git", ".venv", "venv", "node_modules", "__pycache__"],
+  "disable_rules": [],
+  "rules": [
+    {
+      "name": "internal_ticket",
+      "pattern": "\\bACME-[0-9]{4,}\\b",
+      "category": "internal_id",
+      "description": "Example internal ticket id",
+      "flags": [],
+      "enabled": true
+    }
+  ]
+}

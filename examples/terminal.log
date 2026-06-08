@@ -1,0 +1,4 @@
+$ export OPENAI_API_KEY=<fake-openai-key-for-docs>
+$ git clone git@github.example.test:acme/private-agent.git
+Cloning into '/Users/alice/src/private-agent'...
+Error from 192.168.1.20: password:<fake-password-for-docs>

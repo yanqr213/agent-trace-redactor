@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-trace-redactor"
+version = "0.1.0"
+description = "Redact secrets, PII, internal paths, domains, and private repo URLs from AI agent traces."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+  {name = "agent-trace-redactor contributors"}
+]
+keywords = ["ai", "security", "redaction", "agents", "codex", "claude", "cursor", "logs"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Utilities"
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/yanqr213/agent-trace-redactor"
+Issues = "https://github.com/yanqr213/agent-trace-redactor/issues"
+
+[project.scripts]
+agent-trace-redactor = "agent_trace_redactor.cli:main"
+atr = "agent_trace_redactor.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.agent-trace-redactor]
+package = "agent_trace_redactor"

@@ -1,0 +1,3 @@
+{"role":"user","content":"debug failing deploy for customer domain acme-customer.prod.example.test from /home/alice/workspaces/private-agent"}
+{"role":"assistant","tool_call":{"name":"shell","args":{"cmd":"curl -H 'Authorization: Bearer demoBearerTokenForDocsOnly123456' https://acme-customer.prod.example.test/api"}}}
+{"role":"tool","content":"fatal: clone https://github.example.test/acme/private-agent.git into C:\\Users\\alice\\work\\private-agent failed; contact alice@example.test"}
